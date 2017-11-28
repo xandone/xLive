@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.xandone.xlive.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_main_foot_1"
+            style="@style/foot_cb_normal"
+            android:checked="true"
+            android:drawableTop="@drawable/rb_foot_selector"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rb_main_foot_2"
+            style="@style/foot_cb_normal"
+            android:drawableTop="@drawable/rb_foot_selector"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rb_main_foot_3"
+            style="@style/foot_cb_normal"
+            android:drawableTop="@drawable/rb_foot_selector"
+            android:text="首页" />
+
+        <RadioButton
+            android:id="@+id/rb_main_foot_4"
+            style="@style/foot_cb_normal"
+            android:drawableTop="@drawable/rb_foot_selector"
+            android:text="首页" />
+
+
+    </RadioGroup>
+
+</LinearLayout>
