@@ -14,7 +14,7 @@ import com.app.xandone.xlive.utils.SnackbarUtil;
  */
 
 public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
-    private T mPresenter;
+    protected T mPresenter;
 
     protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.app.xandone.xlive.di.module.FragmentModule;
 import com.app.xandone.xlive.di.scope.FragmentScope;
+import com.app.xandone.xlive.ui.news.fragment.NewsFragment;
 
 import dagger.Component;
 
@@ -16,5 +17,7 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = FragmentModule.class)
 public interface FragmentComponent {
     Activity getActivity();
+
+    void inject(NewsFragment newsFragment);
 
 }
