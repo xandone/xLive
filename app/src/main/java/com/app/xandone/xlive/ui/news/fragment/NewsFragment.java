@@ -13,7 +13,6 @@ import com.app.xandone.xlive.ui.news.presenter.NewsPresenter;
 
 public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsContract.View {
 
-
     @Override
     public int setLayout() {
         return R.layout.frag_news_layout;

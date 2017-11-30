@@ -2,10 +2,14 @@ package com.app.xandone.xlive.ui.news.presenter;
 
 import com.app.xandone.xlive.base.RxPresenter;
 import com.app.xandone.xlive.model.DataManager;
+import com.app.xandone.xlive.model.bean.news.NewsSummary;
 import com.app.xandone.xlive.ui.news.contract.NewsContract;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -14,8 +18,10 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class NewsPresenter extends RxPresenter<NewsContract.View> implements NewsContract.Presenter {
-    private Disposable mDisposable;
     private DataManager mDataManager;
+    private int currentPage = 0;
+
+    private static final int NUM_EACH_PAGE = 20;
 
     @Inject
     NewsPresenter(DataManager dataManager) {
@@ -34,8 +40,11 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNewsData() {
+    public void getNewsData(String type) {
+        currentPage = 0;
+        Flowable<List<NewsSummary>> list = mDataManager.getNewsData(type, currentPage, NUM_EACH_PAGE);
 
+//        addSubscrible(list);
     }
 
     @Override

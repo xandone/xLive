@@ -17,7 +17,7 @@ public interface NewsContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getNewsData();
+        void getNewsData(String type);
 
         void insertReadToDB(int id);
     }
