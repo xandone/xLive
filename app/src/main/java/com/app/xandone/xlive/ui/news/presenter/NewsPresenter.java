@@ -3,6 +3,7 @@ package com.app.xandone.xlive.ui.news.presenter;
 import com.app.xandone.xlive.base.RxPresenter;
 import com.app.xandone.xlive.model.DataManager;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
+import com.app.xandone.xlive.ui.CommonSubscriber;
 import com.app.xandone.xlive.ui.news.contract.NewsContract;
 
 import java.util.List;
@@ -10,7 +11,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * author: xandone
@@ -20,8 +23,6 @@ import io.reactivex.disposables.Disposable;
 public class NewsPresenter extends RxPresenter<NewsContract.View> implements NewsContract.Presenter {
     private DataManager mDataManager;
     private int currentPage = 0;
-
-    private static final int NUM_EACH_PAGE = 20;
 
     @Inject
     NewsPresenter(DataManager dataManager) {
@@ -40,11 +41,21 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNewsData(String type) {
+    public void getNewsData(String type, String id) {
         currentPage = 0;
-        Flowable<List<NewsSummary>> list = mDataManager.getNewsData(type, currentPage, NUM_EACH_PAGE);
+        Flowable<NewsSummary> list = mDataManager.getNewsData(type, id, currentPage);
 
-//        addSubscrible(list);
+        addSubscrible(list
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CommonSubscriber<NewsSummary>(mView) {
+                    @Override
+                    public void onNext(NewsSummary newsSummaries) {
+                        mView.showContent(newsSummaries);
+                    }
+                })
+
+        );
     }
 
     @Override

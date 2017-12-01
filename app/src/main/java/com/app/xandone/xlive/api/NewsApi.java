@@ -17,10 +17,10 @@ import retrofit2.http.Path;
 
 public interface NewsApi {
 
-    String Host = "http://c.m.163.com/";
+    String HOST = "http://c.m.163.com/";
 
     @GET("nc/article/{type}/{id}/{startPage}-20.html")
-    Flowable<List<NewsSummary>> getNewsList(
+    Flowable<NewsSummary> getNewsList(
             @Path("type") String type,
             @Path("id") String id,
             @Path("startPage") int startPage);

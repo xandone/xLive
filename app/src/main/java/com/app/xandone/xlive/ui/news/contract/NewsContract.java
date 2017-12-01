@@ -4,6 +4,8 @@ import com.app.xandone.xlive.base.BasePresenter;
 import com.app.xandone.xlive.base.BaseView;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
 
+import java.util.List;
+
 /**
  * author: xandone
  * created on: 2017/11/29 11:03
@@ -17,7 +19,7 @@ public interface NewsContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getNewsData(String type);
+        void getNewsData(String type, String id);
 
         void insertReadToDB(int id);
     }

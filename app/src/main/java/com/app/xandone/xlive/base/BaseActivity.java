@@ -8,12 +8,15 @@ import com.app.xandone.xlive.di.component.DaggerActivityComponent;
 import com.app.xandone.xlive.di.module.ActivityModule;
 import com.app.xandone.xlive.utils.SnackbarUtil;
 
+import javax.inject.Inject;
+
 /**
  * author: xandone
  * created on: 2017/11/27 16:41
  */
 
 public abstract class BaseActivity<T extends BasePresenter> extends SimpleActivity implements BaseView {
+    @Inject
     protected T mPresenter;
 
     protected ActivityComponent getActivityComponent() {

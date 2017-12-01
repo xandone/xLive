@@ -59,7 +59,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (!TextUtils.isEmpty(list.get(position).getDigest())) {
+//        if (!TextUtils.isEmpty(list.get(position).getDigest())) {
+        if (!TextUtils.isEmpty(list.get(position).getT1348649145984().get(position).getDigest())) {
             return TYPE_NORMAL;
         } else {
             return TYPE_PHOTO;

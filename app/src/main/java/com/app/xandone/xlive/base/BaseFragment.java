@@ -8,12 +8,15 @@ import com.app.xandone.xlive.di.component.FragmentComponent;
 import com.app.xandone.xlive.di.module.FragmentModule;
 import com.app.xandone.xlive.utils.SnackbarUtil;
 
+import javax.inject.Inject;
+
 /**
  * author: xandone
  * created on: 2017/11/28 15:07
  */
 
 public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragment implements BaseView {
+    @Inject
     protected T mPresenter;
 
     protected FragmentComponent getFragmentComponent() {

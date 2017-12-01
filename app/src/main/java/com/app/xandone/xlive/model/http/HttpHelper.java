@@ -12,5 +12,5 @@ import io.reactivex.Flowable;
  */
 
 public interface HttpHelper {
-    Flowable<List<NewsSummary>> getNewsData(String type, int num, int page);
+    Flowable<NewsSummary> getNewsData(String type, String id, int page);
 }

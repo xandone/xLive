@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.app.xandone.xlive.di.module.FragmentModule;
 import com.app.xandone.xlive.di.scope.FragmentScope;
-import com.app.xandone.xlive.ui.news.fragment.NewsFragment;
+import com.app.xandone.xlive.ui.news.fragment.NewsMainFragment;
 
 import dagger.Component;
 
@@ -18,6 +18,6 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
-    void inject(NewsFragment newsFragment);
+    void inject(NewsMainFragment newsMainFragment);
 
 }

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.app.xandone.xlive.base.BaseActivity;
+import com.app.xandone.xlive.ui.news.fragment.NewsMainFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,10 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         fragmentList = new ArrayList<>();
+        fragmentList.add(new NewsMainFragment());
+        fragmentList.add(new NewsMainFragment());
+        fragmentList.add(new NewsMainFragment());
+        fragmentList.add(new NewsMainFragment());
 
         mFragmentIndex = 0;
         turnToFragment();
