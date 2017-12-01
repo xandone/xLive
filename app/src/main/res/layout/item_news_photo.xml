@@ -7,6 +7,7 @@
     android:padding="@dimen/item_margin">
 
     <TextView
+        android:id="@+id/photo_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -17,8 +18,9 @@
         tools:text="喜迎油价上涨喜迎油价上涨喜迎油价上涨喜迎油价上涨" />
 
     <ImageView
+        android:id="@+id/photo_img"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_launcher" />
 

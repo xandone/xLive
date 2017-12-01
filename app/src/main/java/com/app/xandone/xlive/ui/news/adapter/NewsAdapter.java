@@ -5,13 +5,17 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.xandone.xlive.R;
 import com.app.xandone.xlive.app.App;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
+import com.app.xandone.xlive.utils.ImageLoader;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -20,7 +24,7 @@ import butterknife.ButterKnife;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<NewsSummary> list;
+    private List<NewsSummary.T1348649145984Bean> list;
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_PHOTO = 1;
@@ -60,7 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
 //        if (!TextUtils.isEmpty(list.get(position).getDigest())) {
-        if (!TextUtils.isEmpty(list.get(position).getT1348649145984().get(position).getDigest())) {
+        if (!TextUtils.isEmpty(list.get(position).getDigest())) {
             return TYPE_NORMAL;
         } else {
             return TYPE_PHOTO;
@@ -68,6 +72,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class NormalHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.item_news_image)
+        ImageView img;
+        @BindView(R.id.item_news_title_tv)
+        TextView tvTitle;
+        @BindView(R.id.item_news_content_tv)
+        TextView tvContent;
+        @BindView(R.id.item_news_date_tv)
+        TextView tvDate;
 
         public NormalHolder(View itemView) {
             super(itemView);
@@ -75,11 +87,22 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bindView(int position) {
+            NewsSummary.T1348649145984Bean bean = list.get(position);
+            if (bean != null) {
+                tvTitle.setText(bean.getTitle());
+                tvContent.setText(bean.getDigest());
+                tvDate.setText(bean.getMtime());
+                ImageLoader.display(App.getInstance(), img, bean.getImgsrc());
+            }
 
         }
     }
 
     class PhotoHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.photo_title)
+        TextView tvTitle;
+        @BindView(R.id.photo_img)
+        ImageView img;
 
         public PhotoHolder(View itemView) {
             super(itemView);
@@ -87,6 +110,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bindView(int position) {
+            NewsSummary.T1348649145984Bean bean = list.get(position);
+            if (bean != null) {
+                tvTitle.setText(bean.getTitle());
+                ImageLoader.display(App.getInstance(), img, bean.getImgsrc());
+            }
 
         }
     }
