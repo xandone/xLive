@@ -22,7 +22,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NewsPresenter extends RxPresenter<NewsContract.View> implements NewsContract.Presenter {
     private DataManager mDataManager;
-    private int currentPage = 0;
 
     @Inject
     NewsPresenter(DataManager dataManager) {
@@ -41,8 +40,7 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNewsData(String type, String id) {
-        currentPage = 0;
+    public void getNewsData(String type, String id, int currentPage, final int mode) {
         Flowable<NewsSummary> list = mDataManager.getNewsData(type, id, currentPage);
 
         addSubscrible(list
@@ -51,7 +49,11 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
                 .subscribeWith(new CommonSubscriber<NewsSummary>(mView) {
                     @Override
                     public void onNext(NewsSummary newsSummaries) {
-                        mView.showContent(newsSummaries);
+                        if (mode == NewsContract.MODE_ONE) {
+                            mView.showContent(newsSummaries);
+                        } else {
+                            mView.showMoreContent(newsSummaries);
+                        }
                     }
                 })
 

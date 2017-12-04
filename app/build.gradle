@@ -72,6 +72,7 @@ dependencies {
     compile rootProject.ext.dependencies["html-textview"]
     compile rootProject.ext.dependencies["FlycoTabLayout_Lib"]
     compile rootProject.ext.dependencies["constraint-layout"]
+    compile rootProject.ext.dependencies["SmartRefreshLayout"]
 
     //rx
     compile rootProject.ext.dependencies["rxjava"]

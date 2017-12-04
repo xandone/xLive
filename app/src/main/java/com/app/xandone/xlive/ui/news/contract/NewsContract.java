@@ -12,6 +12,9 @@ import java.util.List;
  */
 
 public interface NewsContract {
+    int MODE_ONE = 0;
+    int MODE_MORE = 1;
+
     interface View extends BaseView {
         void showContent(NewsSummary newsSummary);
 
@@ -19,7 +22,7 @@ public interface NewsContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getNewsData(String type, String id);
+        void getNewsData(String type, String id, int currentPage, int mode);
 
         void insertReadToDB(int id);
     }
