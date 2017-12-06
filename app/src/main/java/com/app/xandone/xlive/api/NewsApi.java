@@ -18,6 +18,7 @@ import retrofit2.http.Path;
 public interface NewsApi {
 
     String HOST = "http://c.m.163.com/";
+    String HOST_TRANS = "http://fanyi.baidu.com/v2transapi";
 
     @GET("nc/article/{type}/{id}/{startPage}-20.html")
     Flowable<NewsSummary> getNewsList(

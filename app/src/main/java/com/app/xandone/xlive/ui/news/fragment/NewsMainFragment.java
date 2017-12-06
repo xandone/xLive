@@ -1,11 +1,13 @@
 package com.app.xandone.xlive.ui.news.fragment;
 
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import com.app.xandone.xlive.R;
+import com.app.xandone.xlive.app.AppConstans;
 import com.app.xandone.xlive.base.BaseFragment;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
 import com.app.xandone.xlive.ui.news.adapter.BaseFragmentAdapter;
@@ -17,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static android.R.attr.fragment;
 
 
 /**
@@ -31,7 +35,10 @@ public class NewsMainFragment extends BaseFragment implements NewsContract.View 
     TabLayout mTab;
     private BaseFragmentAdapter mBaseFragmentAdapter;
     private List<Fragment> fragmentList;
-    private List<String> titleList = new ArrayList<>(Arrays.asList("NBA", "NBA", "NBA", "NBA", "NBA", "NBA", "NBA", "NBA", "NBA", "NBA", "NBA"));
+    private List<String> titleList;
+
+    private String[] titleArrays;
+    private String[] idArrays;
 
     @Override
     public int setLayout() {
@@ -45,11 +52,12 @@ public class NewsMainFragment extends BaseFragment implements NewsContract.View 
     @Override
     public void initData() {
         super.initData();
+        titleArrays = getResources().getStringArray(R.array.news_channel_name_my);
+        idArrays = getResources().getStringArray(R.array.news_channel_name_my_id);
+        titleList = new ArrayList<>(Arrays.asList(titleArrays));
 
         fragmentList = new ArrayList<>();
-        for (int i = 1; i < titleList.size(); i++) {
-            fragmentList.add(new NewsFragment());
-        }
+        createFragment();
 
         mBaseFragmentAdapter = new BaseFragmentAdapter(getChildFragmentManager(), fragmentList, titleList);
         mNewsVp.setAdapter(mBaseFragmentAdapter);
@@ -64,5 +72,16 @@ public class NewsMainFragment extends BaseFragment implements NewsContract.View 
     @Override
     public void showMoreContent(NewsSummary newsSummary) {
 
+    }
+
+    public void createFragment() {
+        for (int i = 1; i < titleList.size(); i++) {
+            Bundle bundle = new Bundle();
+            bundle.putString(AppConstans.NEWS_NAME, titleArrays[i]);
+            bundle.putString(AppConstans.NEWS_ID, idArrays[i]);
+            NewsFragment fragment = new NewsFragment();
+            fragment.setArguments(bundle);
+            fragmentList.add(fragment);
+        }
     }
 }

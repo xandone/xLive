@@ -3,15 +3,14 @@ package com.app.xandone.xlive.ui.news.fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.app.xandone.xlive.R;
+import com.app.xandone.xlive.app.AppConstans;
 import com.app.xandone.xlive.base.BaseFragment;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
 import com.app.xandone.xlive.ui.news.adapter.NewsAdapter;
 import com.app.xandone.xlive.ui.news.contract.NewsContract;
 import com.app.xandone.xlive.ui.news.presenter.NewsPresenter;
-import com.app.xandone.xlive.widget.CommonItemDecoration;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -36,6 +35,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     private NewsAdapter mNewsApdapter;
     private DividerItemDecoration mDecoration;
     private List<NewsSummary.T1348649145984Bean> newsList;
+    private String mNewsName;
+    private String mNewsId;
 
     private int mPage = 0;
 
@@ -45,10 +46,19 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     }
 
     @Override
+    public void initView() {
+        super.initView();
+        if (getArguments() != null) {
+            mNewsId = getArguments().getString(AppConstans.NEWS_ID);
+            mNewsName = getArguments().getString(AppConstans.NEWS_NAME);
+        }
+    }
+
+    @Override
     public void initData() {
         super.initData();
         mPresenter.attachView(this);
-        mPresenter.getNewsData("list", "T1348649145984", mPage, NewsContract.MODE_ONE);
+        mPresenter.getNewsData("list", mNewsId, mPage, NewsContract.MODE_ONE);
 
         newsList = new ArrayList<>();
         mNewsApdapter = new NewsAdapter(newsList);
@@ -65,7 +75,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPage = 0;
-                mPresenter.getNewsData("list", "T1348649145984", mPage, NewsContract.MODE_ONE);
+                mPresenter.getNewsData("list", mNewsId, mPage, NewsContract.MODE_ONE);
             }
         });
 
@@ -73,7 +83,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 mPage += 20;
-                mPresenter.getNewsData("list", "T1348649145984", mPage, NewsContract.MODE_MORE);
+                mPresenter.getNewsData("list", mNewsId, mPage, NewsContract.MODE_MORE);
             }
         });
     }
@@ -92,7 +102,6 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     public void showMoreContent(NewsSummary newsSummary) {
         mRefreshLayout.finishLoadmore();
         if (newsSummary != null && newsSummary.getT1348649145984() != null) {
-            newsList.clear();
             newsList.addAll(newsSummary.getT1348649145984());
             mNewsApdapter.notifyDataSetChanged();
         }
