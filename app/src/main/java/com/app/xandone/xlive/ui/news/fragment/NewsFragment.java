@@ -3,6 +3,7 @@ package com.app.xandone.xlive.ui.news.fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.app.xandone.xlive.R;
 import com.app.xandone.xlive.app.AppConstans;
@@ -34,7 +35,7 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
 
     private NewsAdapter mNewsApdapter;
     private DividerItemDecoration mDecoration;
-    private List<NewsSummary.T1348649145984Bean> newsList;
+    private List<NewsSummary> newsList;
     private String mNewsName;
     private String mNewsId;
 
@@ -89,20 +90,20 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     }
 
     @Override
-    public void showContent(NewsSummary newsSummary) {
+    public void showContent(List<NewsSummary> newsSummary) {
         mRefreshLayout.finishRefresh();
-        if (newsSummary != null && newsSummary.getT1348649145984() != null) {
+        if (newsSummary != null) {
             newsList.clear();
-            newsList.addAll(newsSummary.getT1348649145984());
+            newsList.addAll(newsSummary);
             mNewsApdapter.notifyDataSetChanged();
         }
     }
 
     @Override
-    public void showMoreContent(NewsSummary newsSummary) {
+    public void showMoreContent(List<NewsSummary> newsSummary) {
         mRefreshLayout.finishLoadmore();
-        if (newsSummary != null && newsSummary.getT1348649145984() != null) {
-            newsList.addAll(newsSummary.getT1348649145984());
+        if (newsSummary != null) {
+            newsList.addAll(newsSummary);
             mNewsApdapter.notifyDataSetChanged();
         }
     }

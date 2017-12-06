@@ -4,6 +4,7 @@ import com.app.xandone.xlive.model.bean.news.NewsSummary;
 import com.app.xandone.xlive.model.http.HttpHelper;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Flowable;
 
@@ -20,7 +21,7 @@ public class DataManager implements HttpHelper {
     }
 
     @Override
-    public Flowable<NewsSummary> getNewsData(String type, String id, int page) {
+    public Flowable<Map<String, List<NewsSummary>>> getNewsData(String type, String id, int page) {
         return mHttpHelper.getNewsData(type, id, page);
     }
 }

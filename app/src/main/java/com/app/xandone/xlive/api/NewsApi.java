@@ -21,7 +21,7 @@ public interface NewsApi {
     String HOST_TRANS = "http://fanyi.baidu.com/v2transapi";
 
     @GET("nc/article/{type}/{id}/{startPage}-20.html")
-    Flowable<NewsSummary> getNewsList(
+    Flowable<Map<String, List<NewsSummary>>> getNewsList(
             @Path("type") String type,
             @Path("id") String id,
             @Path("startPage") int startPage);

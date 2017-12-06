@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  */
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<NewsSummary.T1348649145984Bean> list;
+    private List<NewsSummary> list;
 
     public static final int TYPE_NORMAL = 0;
     public static final int TYPE_PHOTO = 1;
@@ -87,11 +87,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bindView(int position) {
-            NewsSummary.T1348649145984Bean bean = list.get(position);
+            NewsSummary bean = list.get(position);
             if (bean != null) {
                 tvTitle.setText(bean.getTitle());
                 tvContent.setText(bean.getDigest());
-                tvDate.setText(bean.getMtime());
+                tvDate.setText(bean.getPtime());
                 ImageLoader.display(App.getInstance(), img, bean.getImgsrc());
             }
 
@@ -110,7 +110,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void bindView(int position) {
-            NewsSummary.T1348649145984Bean bean = list.get(position);
+            NewsSummary bean = list.get(position);
             if (bean != null) {
                 tvTitle.setText(bean.getTitle());
                 ImageLoader.display(App.getInstance(), img, bean.getImgsrc());

@@ -4,6 +4,7 @@ import com.app.xandone.xlive.api.NewsApi;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<NewsSummary> getNewsData(String type, String id, int page) {
+    public Flowable<Map<String, List<NewsSummary>>> getNewsData(String type, String id, int page) {
         return mNewsApi.getNewsList(type, id, page);
     }
 }

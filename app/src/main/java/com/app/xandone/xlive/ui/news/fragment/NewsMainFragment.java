@@ -28,7 +28,7 @@ import static android.R.attr.fragment;
  * created on: 2017/11/28 14:52
  */
 
-public class NewsMainFragment extends BaseFragment implements NewsContract.View {
+public class NewsMainFragment extends BaseFragment {
     @BindView(R.id.news_main_vp)
     ViewPager mNewsVp;
     @BindView(R.id.news_tablayout)
@@ -63,15 +63,6 @@ public class NewsMainFragment extends BaseFragment implements NewsContract.View 
         mNewsVp.setAdapter(mBaseFragmentAdapter);
         mTab.setupWithViewPager(mNewsVp);
         SimpleUtils.dynamicSetTabLayoutMode(mTab);
-    }
-
-    @Override
-    public void showContent(NewsSummary newsSummary) {
-    }
-
-    @Override
-    public void showMoreContent(NewsSummary newsSummary) {
-
     }
 
     public void createFragment() {

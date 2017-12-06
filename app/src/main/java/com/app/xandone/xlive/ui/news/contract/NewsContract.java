@@ -16,9 +16,9 @@ public interface NewsContract {
     int MODE_MORE = 1;
 
     interface View extends BaseView {
-        void showContent(NewsSummary newsSummary);
+        void showContent(List<NewsSummary> newsSummary);
 
-        void showMoreContent(NewsSummary newsSummary);
+        void showMoreContent(List<NewsSummary> newsSummary);
     }
 
     interface Presenter extends BasePresenter<View> {

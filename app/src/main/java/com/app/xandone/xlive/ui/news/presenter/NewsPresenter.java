@@ -1,18 +1,23 @@
 package com.app.xandone.xlive.ui.news.presenter;
 
+import com.app.xandone.xlive.api.NewsApi;
 import com.app.xandone.xlive.base.RxPresenter;
 import com.app.xandone.xlive.model.DataManager;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
 import com.app.xandone.xlive.ui.CommonSubscriber;
 import com.app.xandone.xlive.ui.news.contract.NewsContract;
 
+import org.reactivestreams.Publisher;
+
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -40,15 +45,21 @@ public class NewsPresenter extends RxPresenter<NewsContract.View> implements New
     }
 
     @Override
-    public void getNewsData(String type, String id, int currentPage, final int mode) {
-        Flowable<NewsSummary> list = mDataManager.getNewsData(type, id, currentPage);
+    public void getNewsData(String type, final String id, int currentPage, final int mode) {
+        Flowable<Map<String, List<NewsSummary>>> list = mDataManager.getNewsData(type, id, currentPage);
 
         addSubscrible(list
+                .flatMap(new Function<Map<String, List<NewsSummary>>, Publisher<List<NewsSummary>>>() {
+                    @Override
+                    public Publisher<List<NewsSummary>> apply(Map<String, List<NewsSummary>> map) {
+                        return Flowable.fromArray(map.get(id));
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new CommonSubscriber<NewsSummary>(mView) {
+                .subscribeWith(new CommonSubscriber<List<NewsSummary>>(mView) {
                     @Override
-                    public void onNext(NewsSummary newsSummaries) {
+                    public void onNext(List<NewsSummary> newsSummaries) {
                         if (mode == NewsContract.MODE_ONE) {
                             mView.showContent(newsSummaries);
                         } else {
