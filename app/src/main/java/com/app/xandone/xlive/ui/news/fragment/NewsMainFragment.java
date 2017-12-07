@@ -61,6 +61,7 @@ public class NewsMainFragment extends BaseFragment {
 
         mBaseFragmentAdapter = new BaseFragmentAdapter(getChildFragmentManager(), fragmentList, titleList);
         mNewsVp.setAdapter(mBaseFragmentAdapter);
+        mNewsVp.setOffscreenPageLimit(fragmentList.size() / 2);
         mTab.setupWithViewPager(mNewsVp);
         SimpleUtils.dynamicSetTabLayoutMode(mTab);
     }

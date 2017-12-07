@@ -19,6 +19,12 @@ import butterknife.ButterKnife;
 public abstract class SimpleFragment extends Fragment {
     protected Activity mActivity;
 
+    //Fragment的View加载完毕的标记
+    protected boolean isViewCreated;
+
+    //Fragment对用户可见的标记
+    protected boolean isUIVisible;
+
     @Override
     public void onAttach(Context context) {
         this.mActivity = (Activity) context;
@@ -37,10 +43,22 @@ public abstract class SimpleFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
         ButterKnife.bind(this, view);
         initView();
         initData();
         initEvent();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
     }
 
     public abstract void initView();
@@ -48,5 +66,16 @@ public abstract class SimpleFragment extends Fragment {
     public abstract void initData();
 
     public abstract void initEvent();
+
+    public void lazyLoad() {
+        if (isViewCreated && isUIVisible) {
+            lazyLoadData();
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+        }
+    }
+
+    protected abstract void lazyLoadData();
 
 }

@@ -87,4 +87,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends SimpleFragme
     }
 
     protected abstract void initInject();
+
+    /**
+     * 懒加载重写
+     */
+    @Override
+    protected void lazyLoadData() {
+
+    }
 }

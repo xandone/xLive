@@ -53,13 +53,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
             mNewsId = getArguments().getString(AppConstans.NEWS_ID);
             mNewsName = getArguments().getString(AppConstans.NEWS_NAME);
         }
-    }
 
-    @Override
-    public void initData() {
-        super.initData();
         mPresenter.attachView(this);
-        mPresenter.getNewsData("list", mNewsId, mPage, NewsContract.MODE_ONE);
 
         newsList = new ArrayList<>();
         mNewsApdapter = new NewsAdapter(newsList);
@@ -67,6 +62,11 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
         mNewsRecycler.setAdapter(mNewsApdapter);
         mNewsRecycler.setLayoutManager(new LinearLayoutManager(mActivity));
         mNewsRecycler.addItemDecoration(mDecoration);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
     }
 
     @Override
@@ -118,5 +118,11 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     @Override
     protected void initInject() {
         getFragmentComponent().inject(this);
+    }
+
+    @Override
+    protected void lazyLoadData() {
+        super.lazyLoadData();
+        mPresenter.getNewsData("list", mNewsId, mPage, NewsContract.MODE_ONE);
     }
 }

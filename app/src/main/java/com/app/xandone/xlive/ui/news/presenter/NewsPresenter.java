@@ -1,6 +1,5 @@
 package com.app.xandone.xlive.ui.news.presenter;
 
-import com.app.xandone.xlive.api.NewsApi;
 import com.app.xandone.xlive.base.RxPresenter;
 import com.app.xandone.xlive.model.DataManager;
 import com.app.xandone.xlive.model.bean.news.NewsSummary;
